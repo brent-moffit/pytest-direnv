@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-direnv"
-version = "0.1.11"
+version = "0.1.12"
 license = "MIT"
 description = "A Pytest plugin that loads environment variables from a .envrc file using direnv."
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
