@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-direnv"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
 packages = [
