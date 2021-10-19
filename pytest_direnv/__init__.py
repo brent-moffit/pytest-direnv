@@ -9,7 +9,7 @@ from pytest_direnv.direnv import load_vars
 def pytest_load_initial_conftests(args, early_config, parser):
     """Load environment variables from .envrc on pytest start"""
 
-    envrc_vars = load_vars(dir=early_config.dir)
+    envrc_vars = load_vars(dir=early_config.rootpath)
 
     for var, val in envrc_vars.items():
         os.environ.setdefault(var, val)

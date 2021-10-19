@@ -1,7 +1,8 @@
 import subprocess
+from pathlib import Path
 
 
-def load_vars(dir: str) -> dict:
+def load_vars(dir: Path) -> dict:
     """Load environment vairables from .envrc in the given directory (or parent)"""
     print("Loading environment vairables from .envrc")
 
