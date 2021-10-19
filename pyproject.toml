@@ -5,8 +5,8 @@ description = ""
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-pytest = "^6.2.5"
+python = "^3.7"
+pytest = "^5.4.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
