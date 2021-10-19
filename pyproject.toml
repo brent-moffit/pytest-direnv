@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-direnv"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
 packages = [
@@ -20,4 +20,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.plugins.pytest11]
-direnv = "pytest_direnv.plugin"
+direnv = "pytest-direnv.plugin"
