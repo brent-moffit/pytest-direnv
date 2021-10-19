@@ -3,6 +3,9 @@ name = "pytest_direnv"
 version = "0.1.0"
 description = ""
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
+packages = [
+  {include = "pyenv_direnv"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
