@@ -12,9 +12,11 @@ def load_vars(dir: Path) -> dict:
             shell=True,
         )
     except subprocess.CalledProcessError as e:
-        print(f'Error loading .envrc file from "{dir}". Is direnv installed?')
-        print(e.output)
-
-        raise e
+        if e.returncode == 127:
+            print("direnv was not found, no .envrc will be loaded.")
+        else:
+            print(f"Error loading .envrc file from {dir}:")
+            print(e.output)
+            raise e
 
     return eval(result)
