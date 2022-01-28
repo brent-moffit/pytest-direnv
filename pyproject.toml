@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-direnv"
-version = "0.1.12"
+version = "0.1.13"
 license = "MIT"
 description = "A Pytest plugin that loads environment variables from a .envrc file using direnv."
 authors = ["brent-moffit <72231013+brent-moffit@users.noreply.github.com>"]
@@ -20,7 +20,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pytest = "^5.4.1"
+pytest = ">=5.4.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
