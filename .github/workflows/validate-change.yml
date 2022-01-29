@@ -1,0 +1,37 @@
+name: "Validate Change"
+
+on:
+  pull_request
+
+jobs:
+  validate_change:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install poetry
+        run: |
+          python -m pip install --upgrade pip "poetry==1.1.12"
+          poetry config virtualenvs.in-project true
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        run: poetry install
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      - name: Run black
+        run: poetry run black --check .
+      - name: Run flake8
+        run: poetry run flake8 .
+      - name: Run pytest
+        run: poetry run pytest .
