@@ -1,0 +1,37 @@
+name: "Require Version Increase"
+
+on:
+  pull_request:
+    branches: [ develop, master ]
+
+jobs:
+  check_version:
+    name: Check Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Compare Versions
+        run: |
+          diff=$(git diff origin/${{ github.base_ref }} HEAD -G"version")
+          old_ver_re='\-version = \"([0-9.]+)\"'
+          new_ver_re='\+version = \"([0-9.]+)\"'
+          [[ $diff =~ $old_ver_re ]]
+          old_ver=${BASH_REMATCH[1]}
+          [[ $diff =~ $new_ver_re ]]
+          new_ver=${BASH_REMATCH[1]}
+          if [[ "$old_ver" == "$new_ver" ]]
+          then
+            echo "Use 'poetry version' to bump version"
+            [[ "$old_ver" != "$new_ver" ]]
+          fi
+          expected=$( printf "$old_ver\n$new_ver" )
+          actual=$( echo "$expected" | sort -V )
+          if [[ "$expected" != "$actual" ]]
+          then
+            echo "Use 'poetry version' to bump version higher than $old_ver"
+            [[ "$expected" == "$actual" ]]
+          fi

@@ -1,0 +1,33 @@
+name: "Tag Releases"
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  tag_release:
+    name: Tag Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Get Version
+        run: |
+          toml_version=$( cat pyproject.toml | grep version )
+          ver_re='version = \"([0-9.]+)\"'
+          [[ "$toml_version" =~ $ver_re ]]
+          version="v${BASH_REMATCH[1]}"
+          echo "VERSION=$version" >> $GITHUB_ENV
+      - name: Tag Release
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ env.VERSION }}',
+              sha: context.sha
+            })
+          
