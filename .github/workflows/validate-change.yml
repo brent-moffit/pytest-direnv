@@ -34,4 +34,6 @@ jobs:
       - name: Run flake8
         run: poetry run flake8 .
       - name: Run pytest
-        run: poetry run pytest .
+        run: |
+          direnv allow
+          poetry run pytest .
