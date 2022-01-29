@@ -35,5 +35,7 @@ jobs:
         run: poetry run flake8 .
       - name: Run pytest
         run: |
+          sudo apt-get update
+          sudo apt-get install direnv
           direnv allow
           poetry run pytest .
